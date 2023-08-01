@@ -8,7 +8,7 @@ module.exports.create=async function(req,res){
 
 });
 
-const updateOpt=await Option.findByIdAndUpdate(opt._id,{"add_vote":`http://localhost:8000/api/v1/options/${opt._id}/add_vote`})
+const updateOpt=await Option.findByIdAndUpdate(opt._id,{"add_vote":`https://polling-pusq.onrender.com/api/v1/options/${opt._id}/add_vote`})
 updateOpt.save()
 // now searching the question so that we can append the option in question-->option array
 const ques=await Question.findById(req.params.id);
