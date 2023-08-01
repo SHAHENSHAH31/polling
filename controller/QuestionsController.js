@@ -30,17 +30,18 @@ module.exports.showDetails= async function(req,res){
 }
 
 module.exports.delete=async function(req,res){
-
-   const ques= await Question.deleteOne(req.params.id);
-   if(ques){
-    
-        await Question.deleteOne(req.params.id)
-
-          await Option.deleteMany({question:req.param.id});
+  const ques= await Question.findById(req.params.id).clone().catch(function(err){ console.log(err)})
+  if(ques){
+      // delete all the option ⁉️ of the option db having the question id as the req.params.id
+      await Question.deleteOne(req.params.id).clone().catch(function(err){ console.log(err)})
+      // deleting all the option of that question
+      await Option.deleteMany({question:req.params.id}).clone().catch(function(err){ console.log(err)})
           res.send("ques deleted");
-   }
 
-   else{
-    res.send('question does not exist');
-   }
+  }
+  //  if th at question of the given id does not exists then just sending a message
+  else{
+      res.send('question does not exists')
+  }
+  
 }

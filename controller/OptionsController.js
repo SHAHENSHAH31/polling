@@ -8,7 +8,7 @@ module.exports.create=async function(req,res){
 
 });
 
-const updateOpt=await Option.findByIdAndUpdate(opt._id,{"add_vote":`http://localhost:3000/api/v1/options/${opt._id}/add_vote`})
+const updateOpt=await Option.findByIdAndUpdate(opt._id,{"add_vote":`http://localhost:8000/api/v1/options/${opt._id}/add_vote`})
 updateOpt.save()
 // now searching the question so that we can append the option in question-->option array
 const ques=await Question.findById(req.params.id);
@@ -24,7 +24,7 @@ else{
 }
 }
 
-module.exports.add_vote=async function(req,res){
+module.exports.add_vote = async function(req,res){
 // in this votes will be added to the particular option of the question
 console.log(req.params.id)
 // this the increment query in which the vote is incremented by one 
